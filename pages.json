@@ -1,31 +1,32 @@
 {
   "pages": [{
       "path": "pages/home/home",
-      "style": {
-        // "navigationBarTitleText": "",
-        "enablePullDownRefresh": false
-      }
+      "style": {}
     },
     {
       "path": "pages/cate/cate",
-      "style": {
-        // "navigationBarTitleText": "",
-        "enablePullDownRefresh": false
-      }
+      "style": {}
     },
     {
       "path": "pages/cart/cart",
-      "style": {
-        // "navigationBarTitleText": "",
-        "enablePullDownRefresh": false
-      }
+      "style": {}
     },
     {
       "path": "pages/my/my",
-      "style": {
-        // "navigationBarTitleText": "",
-        "enablePullDownRefresh": false
-      }
+      "style": {}
+    }
+  ],
+  "subPackages": [
+    {
+      "root": "subpkg",
+      "pages": [{
+        "path" : "goods_detail/goods_detail",
+        "style" : 
+        {
+          // "navigationBarTitleText" : "",
+          // "enablePullDownRefresh" : false
+        }
+      }]
     }
   ],
   "globalStyle": {

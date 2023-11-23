@@ -1,6 +1,28 @@
 <template>
   <view>
-    Home
+    <!-- 轮播图区域 -->
+    <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
+      <swiper-item v-for="(item) in swiperList" :key="item.goods_id">
+        <navigator class="swiper-item" :url="'/subpkg/goods_detail/goods_detail?goods_id=' + item.goods_id">
+          <image :src="item.image_src"></image>
+        </navigator>
+      </swiper-item>
+    </swiper>
+    
+    <!-- 分类导航区域 -->
+    <view class="nav-list">
+      <view class="nav-item" v-for="(item) in navList" :key="item.image_src" @click="navClickHandler(item)">
+        <image :src="item.image_src" class="nav-image"></image>
+      </view>
+    </view>
+    
+    <!-- 楼层区域 -->
+    <view class="floor-list">
+      <view class="floor-item" v-for="item in floorList" :key="item.floor_title.image_src">
+        <image class="floor-title" :src="item.floor_title.image_src"></image>
+      </view>
+    </view>
+    
   </view>
 </template>
 
@@ -8,12 +30,77 @@
   export default {
     data() {
       return {
-        
+        swiperList: [],
+        navList: [],
+        floorList: []
       };
+    },
+    onLoad() {
+      this.getSwiperList()
+      this.getNavList(),
+      this.getFloorList()
+    },
+    methods: {
+      async getSwiperList() {
+        const {
+          data: res
+        } = await uni.$http.get('/api/public/v1/home/swiperdata')
+        // console.log(res)
+        if (res.meta.status !== 200) {
+          return uni.$showMsg()
+        }
+        this.swiperList = res.message
+      },
+
+      async getNavList() {
+        const {
+          data: res
+        } = await uni.$http.get('/api/public/v1/home/catitems')
+        if (res.meta.status !== 200) return uni.$showMsg()
+        this.navList = res.message
+      },
+      
+      navClickHandler(item) {
+        if (item.name === '分类') {
+          uni.switchTab({
+            url: '/pages/cate/cate'
+          })
+        }
+      },
+      
+      async getFloorList() {
+        const { data: res } = await uni.$http.get('/api/public/v1/home/floordata')
+        if (res.meta.status !== 200) return uni.$showMsg()
+        this.floorList = res.message
+      }
     }
   }
 </script>
 
 <style lang="scss">
+  swiper {
+    height: 330rpx;
 
+    .swiper-item,
+    image {
+      width: 100%;
+      width: 100%;
+    }
+  }
+  
+  .nav-list {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+    .nav-image {
+      width: 128rpx;
+      height: 140rpx;
+    }
+  }
+  
+  .floor-title {
+    width: 100%;
+    height: 60rpx;
+  }
+  
 </style>
