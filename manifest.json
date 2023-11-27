@@ -55,8 +55,10 @@
             "urlCheck" : true,
             "checkSiteMap" : false
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+        "libVersion": "3.1.5"
         // "lazyCodeLoading": "requiredComponents"
     },
+    
     "vueVersion" : "2"
 }
