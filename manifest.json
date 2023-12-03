@@ -56,7 +56,10 @@
             "checkSiteMap" : false
         },
         "usingComponents" : true,
-        "libVersion": "3.1.5"
+        "libVersion": "3.1.5",
+        "requiredPrivateInfos": [
+          "chooseAddress"
+        ]
         // "lazyCodeLoading": "requiredComponents"
     },
     
